@@ -1,0 +1,38 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Booking complete',
+    'panel' => 'centered-panel',
+    'badges' => array(
+        4 => 'Booking complete',
+    ),
+    'misc' => array(
+        'badgesActive' => 4,
+    ),
+));
+
+?>
+
+<div>
+    <div class="no-print" style="margin-bottom: 16px;">
+        <?= $this->message('Thank you very much for your booking! We are looking forward to welcome you!') ?>
+    </div>
+
+    <div class="sandbox sandbox-list">
+        <?= $this->roomPreview($this->room) ?>
+    </div>
+
+    <div class="sandbox sandbox-list">
+        <?= $this->bookingDatePreview($this->dateArrival, $this->dateDeparture, $this->capacity) ?>
+    </div>
+
+    <div class="sandbox sandbox-list">
+        <?= $this->userPreview($this->user, ['Notes' => $this->escapeHtml($this->user->getMeta('notes'))]) ?>
+    </div>
+
+    <div class="sandbox sandbox-list">
+        <?= $this->bookingBundleReview($this->bundle, $this->bundleItems) ?>
+    </div>
+
+    <div class="padded centered-text gray no-print"><?= $this->t('It is recommended to print this page for your documentation.') ?></div>
+</div>

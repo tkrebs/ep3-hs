@@ -1,0 +1,118 @@
+<?php
+
+$this->headScript()->appendFile($this->basePath('js/controller/calendar/index.min.js'));
+
+?>
+
+<div id="calendar-choice">
+    <form method="get" action="<?= $this->url('calendar') ?>#calendar-results-animate">
+        <table>
+            <tr>
+                <td id="calendar-arrival-icon-col" class="centered-text">
+                    <div><img src="<?= $this->basePath('imgs/icons/arrival.png') ?>"></div>
+                    <div class="large-text"><?= $this->t('Arrival') ?></div>
+                </td>
+
+                <td>
+                    <div class="panel">
+                        <div class="inline-element">
+                            <label for="calendar-arrival-input" class="inline-label symbolic symbolic-date">
+                                <span><?= $this->t('Arrival date') ?></span>
+                            </label>
+
+                            <input type="text" name="date-arrival" id="calendar-arrival-input" value="<?= $this->dateFormat($this->dateArrival, IntlDateFormatter::MEDIUM) ?>"
+                                class="inline-label-container" style="padding-left: 28px; width: 100%;" tabindex="1">
+                        </div>
+                    </div>
+
+                    <div class="panel" style="margin-bottom: 0px;">
+                        <div id="calendar-arrival">
+                            <p class="centered-text gray"><em><?= $this->t('One calendar should appear here ...') ?></em></p>
+                        </div>
+                    </div>
+                </td>
+
+                <td id="calendar-departure-icon-col" class="centered-text">
+                    <div><img src="<?= $this->basePath('imgs/icons/departure.png') ?>"></div>
+                    <div class="large-text"><?= $this->t('Departure') ?></div>
+                </td>
+
+                <td>
+                    <div class="panel">
+                        <div class="inline-element">
+                            <label for="calendar-departure-input" class="inline-label symbolic symbolic-date">
+                                <span><?= $this->t('Departure date') ?></span>
+                            </label>
+
+                            <input type="text" name="date-departure" id="calendar-departure-input" value="<?= $this->dateFormat($this->dateDeparture, IntlDateFormatter::MEDIUM) ?>"
+                                class="inline-label-container" style="padding-left: 28px; width: 100%;" tabindex="2">
+                        </div>
+                    </div>
+
+                    <div class="panel" style="margin-bottom: 0px;">
+                        <div id="calendar-departure">
+                            <p class="centered-text gray"><em><?= $this->t('One calendar should appear here ...') ?></em></p>
+                        </div>
+                    </div>
+                </td>
+
+                <td id="calendar-capacity-col">
+                    <div>
+                        <?= $this->calendarCapacityChoice($this->capacityMax, $this->capacity) ?>
+                    </div>
+
+                    <div class="separator separator-line-gray"></div>
+
+                    <div class="panel centered-text">
+                        <div id="calendar-submit-link" style="display: none;">
+                            <a href="#" class="default-button">
+                                <span class="symbolic symbolic-search"><?= sprintf($this->t('Check %srooms%s'), '<b>', '</b>') ?></span>
+                            </a>
+                        </div>
+
+                        <div id="calendar-submit-input">
+                            <input type="hidden" name="check" value="true">
+                            <input type="submit" value="<?= sprintf($this->t('Check %srooms%s'), '', '') ?>" class="default-button">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div id="calendar-results">
+    <div id="calendar-results-animate">
+        <?php if ($this->roomsBookable): ?>
+            <div class="separator-large separator-line-gray"></div>
+
+            <div class="centered-text light-gray"><?= sprintf($this->t('We found the following %sfree rooms%s for your request:'), '<b>', '</b>') ?></div>
+
+            <div class="separator-small"></div>
+
+            <?= $this->calendarRoomsFormat($this->roomsBookable) ?>
+        <?php elseif (is_array($this->roomsBookable)): ?>
+            <div class="separator-large separator-line-gray"></div>
+
+            <div class="centered-panel padded centered-text">
+                <p class="large-text">
+                    <em class="symbolic symbolic-warning">
+                        <?php if ($this->roomsFree): ?>
+                            <?= sprintf($this->t('We are very sorry, but we %sdo not offer rooms%s for this period (yet).'), '<b>', '</b>') ?>
+                        <?php else: ?>
+                            <?= sprintf($this->t('We are very sorry, but we are already %sbooked out%s for this period.'), '<b>', '</b>') ?>
+                        <?php endif; ?>
+                    </em>
+                </p>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<?php if ($this->option('service.login.footer', 'false') == 'false'): ?>
+    <div id="calendar-toolbar">
+        <div id="calendar-toolbar-panel">
+            <?= $this->userToolbar() ?>
+        </div>
+    </div>
+<?php endif; ?>

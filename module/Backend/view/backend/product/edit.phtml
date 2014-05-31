@@ -1,0 +1,34 @@
+<?php
+
+if ($this->product) {
+    $title = 'Edit product';
+    $pid = $this->product->need('pid');
+} else {
+    $title = 'New product';
+    $pid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Products' => $this->url('backend/product'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('product') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editProductForm, $this->url('backend/product/edit', ['pid' => $pid])) ?>
+    </div>
+</div>

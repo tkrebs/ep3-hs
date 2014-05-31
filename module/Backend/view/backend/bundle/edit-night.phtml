@@ -1,0 +1,36 @@
+<?php
+
+$bid = $this->bundle->need('bid');
+
+if ($this->bundleNight) {
+    $title = 'Edit bundle night rule';
+    $bnid = $this->bundleNight->need('bnid');
+} else {
+    $title = 'New bundle night rule';
+    $bnid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bundle components' => $this->url('backend/bundle/edit/component', ['bid' => $bid]),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('bundle-night') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editBundleNightForm, $this->url('backend/bundle/edit/component/edit-night', ['bid' => $bid, 'bnid' => $bnid])) ?>
+    </div>
+</div>

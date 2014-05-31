@@ -1,0 +1,26 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Export',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Export') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('export') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <div class="sandbox sandbox-list">
+            <?= $this->formDefault($this->exportForm, $this->url('backend/export')) ?>
+        </div>
+    </div>
+</div>

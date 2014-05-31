@@ -1,0 +1,88 @@
+Options:
+
+- client.name.full
+- client.name.short
+- client.contact.email
+- client.contact.phone
+- client.website                        URL
+- client.website.contact                URL
+- client.website.imprint                URL
+- client.logo.website                   (optional) true|false
+
+- service.name.full
+- service.name.short
+- service.meta.description
+- service.meta.keywords
+- service.website                       URL
+- service.maintenance                   (optional) true|false
+- service.maintenance.message           (optional)
+- service.branding                      (optional) true|false
+- service.branding.name
+- service.branding.website
+- service.login.footer                  (optional) true|false
+- service.notify.booking                (optional) true|false
+
+- subject.info                          HTML
+- subject.help                          HTML
+- subject.type                          (including determiner)
+- subject.rules.document.name           (optional)
+- subject.rules.document.file           (optional)
+- subject.rules.text                    (optional)
+- subject.confirmation.text             (optional)
+
+- payment.paypal                        (optional) true|false
+- payment.paypal.endpoint               (optional)
+- payment.paypal.client.id              (optional)
+- payment.paypal.client.secret          (optional)
+
+
+
+Bill meta keys:
+
+- payment.method
+
+
+
+Booking meta keys:
+
+- notes
+
+
+
+Bundle meta keys:
+
+- name
+
+
+
+Product meta keys:
+
+- name
+- description
+
+
+
+Room meta keys:
+
+- name
+- info
+- description
+- pictures
+
+
+
+User meta keys:
+
+- gender
+- firstname
+- lastname
+- street
+- zip
+- city
+- country
+- phone
+- locale                                (optional)
+- allow.{privilege}                     (optional) true|false
+- deletion.reason                       (optional)
+- legacy-pw                             (optional)
+- notes                                 (optional)

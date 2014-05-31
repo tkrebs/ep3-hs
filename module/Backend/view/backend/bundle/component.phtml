@@ -1,0 +1,34 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Bundle components',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bundles' => $this->url('backend/bundle'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Bundle components') ?></h1>
+
+    <p><?= sprintf($this->t('For the bundle "%s"'), $this->bundle->getMeta('name')) ?></p>
+
+    <div class="separator-small"></div>
+
+    <h2><?= $this->t('Nights') ?></h2>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendBundleNightsFormat($this->bundleNights, $this->bundle) ?>
+
+    <div class="separator-small"></div>
+
+    <h2><?= $this->t('Products') ?></h2>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendBundleItemsFormat($this->bundleItems, $this->bundle) ?>
+</div>

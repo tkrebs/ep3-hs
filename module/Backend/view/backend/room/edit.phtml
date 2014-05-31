@@ -1,0 +1,69 @@
+<?php
+
+if ($this->room) {
+    $title = 'Edit room';
+    $rid = $this->room->need('rid');
+} else {
+    $title = 'New room';
+    $rid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Rooms' => $this->url('backend/room'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/room/edit.min.js'));
+
+$this->headScript()->appendFile($this->basePath('js/tinymce/tinymce.min.js'));
+$this->headScript()->appendFile($this->basePath('js/tinymce/tinymce.setup.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editRoomForm, $this->url('backend/room/edit', ['rid' => $rid])) ?>
+
+        <?php if ($this->room): ?>
+            <div id="erf-pictures" style="display: none; margin-top: 8px;">
+                <div class="separator separator-line"></div>
+
+                <div>
+                    <?php $index = 0; ?>
+
+                    <?php foreach ($this->room->getPictureNumbers() as $pictureNumber): ?>
+                        <div class="panel" style="margin: 0px 8px 8px 0px; display: inline-block;">
+                            <div>
+                                <a href="<?= $this->basePath($this->room->getPictureUrl($pictureNumber)) ?>" target="_blank" rel="pretty-photo[rps]" style="opacity: 1.0;">
+                                    <img src="<?= $this->basePath($this->room->getThumbnailUrl($pictureNumber)) ?>" class="rounded">
+                                </a>
+                            </div>
+
+                            <?php if ($index > 0): ?>
+                                <div style="float: left;">
+                                    <a href="<?= $this->url('backend/room/promote-picture', ['rid' => $rid, 'pid' => $pictureNumber]) ?>"
+                                       class="small-text unlined gray"><?= $this->t('Make first') ?></a>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="right-text">
+                                <a href="<?= $this->url('backend/room/delete-picture', ['rid' => $rid, 'pid' => $pictureNumber]) ?>"
+                                   class="small-text unlined gray"><?= $this->t('Delete') ?></a>
+                            </div>
+                        </div>
+
+                        <?php $index++; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

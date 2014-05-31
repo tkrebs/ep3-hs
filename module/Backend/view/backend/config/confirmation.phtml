@@ -1,0 +1,40 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Edit confirmation text',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Config' => $this->url('backend/config'),
+    ),
+    'links' => array(
+        'Edit info page' => $this->url('backend/config/info'),
+        'Edit help page' => $this->url('backend/config/help'),
+        'Edit booking rules' => $this->url('backend/config/rules'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Edit confirmation text') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <p class="symbolic symbolic-info"><?= $this->t('This text appears in the confirmation email guests receive upon submitting their booking.') ?></p>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <form method="post" action="<?= $this->url('backend/config/confirmation') ?>">
+            <textarea name="ecf-text" style="width: 100%; height: 180px;"><?= $this->confirmationText ?></textarea>
+            <div class="default-form-notes"><?= $this->t('Remember: The system generates salutation, thank-you-message and valediction. Only provide additional messages here.') ?></div>
+
+            <div class="separator-small"></div>
+
+            <input type="submit" name="ecf-submit" value="<?= $this->t('Save') ?>" class="default-button" style="width: 175px;">
+        </form>
+    </div>
+</div>

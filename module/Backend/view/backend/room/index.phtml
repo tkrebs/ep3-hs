@@ -1,0 +1,18 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Rooms',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Rooms') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendRoomsFormat($this->rooms) ?>
+</div>

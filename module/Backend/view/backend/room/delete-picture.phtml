@@ -1,0 +1,40 @@
+<?php
+
+$roomIdentifier = sprintf('%s %s',
+    $this->t('Room'), $this->room->need('rnr'));
+
+$rid = $this->room->need('rid');
+
+$this->setup(array(
+    'title' => 'Delete picture',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        $roomIdentifier => $this->url('backend/room/edit', ['rid' => $rid]),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Delete picture') ?></h1>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded centered-text">
+        <div class="panel" style="display: inline-block;">
+            <img src="<?= $this->room->getPictureUrl($this->pid) ?>" class="rounded" style="max-width: 320; max-height: 320px;">
+        </div>
+
+        <div style="margin-top: 16px;">
+            <span class="symbolic symbolic-warning"><?= $this->t('Deleting this picture cannot be undone. Are you sure?') ?></span>
+        </div>
+
+        <div class="separator-small"></div>
+
+        <div class="centered-text">
+            <a href="<?= $this->url('backend/room/edit', ['rid' => $rid]) ?>" class="default-button"><?= $this->t('No, cancel') ?></a>
+            <a href="<?= $this->url('backend/room/delete-picture', ['rid' => $rid, 'pid' => $this->pid], ['query' => ['confirmed' => 'true']]) ?>" class="default-button"><?= $this->t('Yes, delete') ?></a>
+        </div>
+    </div>
+</div>

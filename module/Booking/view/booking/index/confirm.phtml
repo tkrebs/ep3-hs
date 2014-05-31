@@ -1,0 +1,50 @@
+<?php
+
+$this->setup(array_merge_recursive(array(
+    'title' => 'Booking confirmation',
+    'panel' => 'centered-panel',
+    'messages' => array(
+        'error' => $this->msg,
+    ),
+    'back' => array(
+        'Registration' => $this->bookingUrl('booking/register'),
+    ),
+), $this->bookingDefaultBadges(3)));
+
+$this->headScript()->appendFile($this->basePath('js/controller/booking/confirm.min.js'));
+
+?>
+
+<div>
+    <form method="post" action="<?= $this->bookingUrl('booking/confirm') ?>">
+        <div class="sandbox sandbox-list">
+            <?= $this->roomPreview($this->room) ?>
+        </div>
+
+        <div class="sandbox sandbox-list">
+            <?= $this->bookingDatePreview($this->dateArrival, $this->dateDeparture, $this->capacity) ?>
+        </div>
+
+        <div class="sandbox sandbox-list">
+            <?= $this->userPreview($this->user, ['Notes' => $this->escapeHtml($this->user->getExtra('notes'))]) ?>
+        </div>
+
+        <div class="sandbox sandbox-list">
+            <?= $this->bookingBundleReview($this->bundle, $this->bundleItems) ?>
+        </div>
+
+        <?= $this->bookingRules() ?>
+
+        <div class="padded centered-text">
+            <div id="confirmation-submit-link" style="display: none;">
+                <a href="#" class="default-button">
+                    <span class="symbolic symbolic-arrow-right"><?= sprintf($this->t('%sComplete%s booking'), '<b>', '</b>') ?></span>
+                </a>
+            </div>
+
+            <div id="confirmation-submit-input">
+                <input type="submit" name="bf-submit" value="<?= sprintf($this->t('%sComplete%s booking'), '', '') ?>" class="default-button">
+            </div>
+        </div>
+    </form>
+</div>

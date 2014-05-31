@@ -1,0 +1,22 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Bundles',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Bundles') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('bundle') ?>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendBundlesFormat($this->bundles) ?>
+</div>

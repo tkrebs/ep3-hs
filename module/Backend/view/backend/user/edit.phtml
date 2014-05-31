@@ -1,0 +1,118 @@
+<?php
+
+if ($this->user) {
+    $title = 'Edit user';
+    $uid = $this->user->need('uid');
+} else {
+    $title = 'New user';
+    $uid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Users' => $this->url('backend/user'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/user/edit.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('user') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?php
+
+        $form = $this->editUserForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('backend/user/edit', ['uid' => $uid]));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <div>
+            <table class="default-table half-table" style="float: left; border-right: solid 1px #CCC;">
+                <?= $this->formRowDefault($form, 'euf-uid') ?>
+                <?= $this->formRowDefault($form, 'euf-alias') ?>
+                <?= $this->formRowDefault($form, 'euf-status') ?>
+                <?= $this->formRowDefault($form, 'euf-email') ?>
+                <?= $this->formRowDefault($form, 'euf-pw') ?>
+                <?= $this->formRowDefault($form, 'euf-notes') ?>
+
+                <?php if ($this->user): ?>
+
+                <tr>
+                    <td class="right-text"><?= $this->t('Last activity') ?></td>
+                    <td><?= $this->user->get('last_activity') ? $this->prettyDate(new DateTime($this->user->get('last_activity'))) : '-' ?></td>
+                </tr>
+
+                <tr>
+                    <td class="right-text"><?= $this->t('Last IP') ?></td>
+                    <td><?= $this->user->get('last_ip', '-') ?></td>
+                </tr>
+
+                <tr>
+                    <td class="right-text"><?= $this->t('Created') ?></td>
+                    <td><?= $this->prettyDate(new DateTime($this->user->need('created'))) ?></td>
+                </tr>
+
+                <?php endif; ?>
+            </table>
+
+            <table class="default-table half-table" style="float: right; border-left: none;">
+                <?= $this->formRowDefault($form, 'euf-gender') ?>
+
+                <tr>
+                    <td class="default-form-label-row">
+                        <?= $this->formLabel($form->get('euf-firstname')) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElement($form->get('euf-firstname')) ?>
+                        <?= $this->formElement($form->get('euf-lastname')) ?>
+                        <?= $this->formElementErrors($form->get('euf-firstname')) ?>
+                        <?= $this->formElementErrors($form->get('euf-lastname')) ?>
+                    </td>
+                </tr>
+
+                <?= $this->formRowDefault($form, 'euf-street') ?>
+
+                <tr>
+                    <td class="default-form-label-row">
+                        <?= $this->formLabel($form->get('euf-zip')) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElement($form->get('euf-zip')) ?>
+                        <?= $this->formElement($form->get('euf-city')) ?>
+                        <?= $this->formElementErrors($form->get('euf-zip')) ?>
+                        <?= $this->formElementErrors($form->get('euf-city')) ?>
+                    </td>
+                </tr>
+
+                <?= $this->formRowDefault($form, 'euf-country') ?>
+                <?= $this->formRowDefault($form, 'euf-phone') ?>
+            </table>
+        </div>
+
+        <br clear="all">
+
+        <div class="separator separator-line"></div>
+
+        <div class="centered-text">
+            <?= $this->formElement($form->get('euf-submit')) ?>
+        </div>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

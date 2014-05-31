@@ -1,0 +1,69 @@
+<?php
+
+echo chr(239) . chr(187) . chr(191); // UTF-8 BOM
+
+echo sprintf("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
+    $this->t('BID'),
+    $this->t('Room'),
+    $this->t('Arrival'),
+    $this->t('Departure'),
+    $this->t('Persons'),
+    $this->t('Guest name'),
+    $this->t('Guest address'),
+    $this->t('Guest email'),
+    $this->t('Guest phone'),
+    $this->t('Invoice number'),
+    $this->t('Invoice amount'),
+    $this->t('Payment method'),
+    $this->t('Payment status'));
+
+foreach ($this->bookings as $bid => $booking) {
+
+    if ($booking->getExtra('room')) {
+        $roomLabel = $booking->needExtra('room')->getName($this);
+    } else {
+        $roomLabel = $this->t('All rooms');
+    }
+
+    $user = $booking->needExtra('user');
+
+    $bill = $booking->getExtra('bill');
+
+    if ($bill) {
+        $invoiceNumber = $bill->get('bnr', '-');
+        $invoiceAmount = $this->currencyFormat($bill->getTotal() / 100);
+
+        switch ($bill->getMeta('payment.method')) {
+            case 'paypal':
+                $paymentMethod = 'PayPal';
+                break;
+            case 'invoice':
+                $paymentMethod = 'Invoice';
+                break;
+            default:
+                $paymentMethod = 'Unknown';
+        }
+
+        $paymentStatus = $bill->getStatus();
+    } else {
+        $invoiceNumber = '-';
+        $invoiceAmount = '-';
+        $paymentMethod = 'Unknown';
+        $paymentStatus = 'Unknown';
+    }
+
+    echo sprintf("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
+        $bid,
+        $roomLabel,
+        $this->dateFormat(new DateTime($booking->need('date_arrival')), IntlDateFormatter::MEDIUM),
+        $this->dateFormat(new DateTime($booking->need('date_departure')), IntlDateFormatter::MEDIUM),
+        $booking->need('quantity'),
+        str_replace(';', ',', html_entity_decode($user->need('alias'))),
+        str_replace(';', ',', html_entity_decode(trim($user->getMeta('street') . ', ' . $user->getMeta('zip') . ' ' . $user->getMeta('city'), ', '))),
+        str_replace(';', ',', html_entity_decode($user->need('email'))),
+        str_replace(';', ',', html_entity_decode("'" . $user->getMeta('phone'))),
+        $invoiceNumber,
+        $invoiceAmount,
+        $this->t($paymentMethod),
+        $this->t($paymentStatus));
+}

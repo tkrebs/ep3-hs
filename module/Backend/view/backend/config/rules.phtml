@@ -1,0 +1,31 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Edit booking rules',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Config' => $this->url('backend/config'),
+    ),
+    'links' => array(
+        'Edit info page' => $this->url('backend/config/info'),
+        'Edit help page' => $this->url('backend/config/help'),
+        'Edit confirmation text' => $this->url('backend/config/confirmation'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Edit booking rules') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editRulesForm, $this->url('backend/config/rules')) ?>
+    </div>
+</div>

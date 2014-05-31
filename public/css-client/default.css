@@ -1,0 +1,19 @@
+h2, h3, h4, h5, h6 { color: #5BA39E; }
+
+/* Layout - Calendar */
+
+.cc-range-member a {
+    border-color: #5BA39E !important;
+    background: #5BA39E !important;
+}
+
+/* General Purpose - Classes */
+
+.my-highlight { color: #5F8024; }
+
+.badge { background-color: #377271; }
+.badge-label { color: #377271; }
+
+/* Links */
+
+a:link, a:visited { color: #377271; }

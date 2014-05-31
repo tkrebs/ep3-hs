@@ -1,0 +1,36 @@
+<?php
+
+$bid = $this->bill->need('bid');
+
+if ($this->billItem) {
+    $title = 'Edit product bill';
+    $biid = $this->billItem->need('biid');
+} else {
+    $title = 'New product bill';
+    $biid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bill components' => $this->url('backend/bill/edit/component', ['bid' => $bid]),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/bill/edit-item.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editBillItemForm, $this->url('backend/bill/edit/component/edit-item', ['bid' => $bid, 'biid' => $biid])) ?>
+
+        <div id="ebif-url-provider" data-autocomplete-product-url="<?= $this->url('backend/product/interpret', [], ['query' => ['id' => 'false']]) ?>"></div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<?php
+
+$this->setup(array(
+    'title' => $this->room->getName($this),
+    'panel' => 'centered-panel',
+    'back' => true,
+));
+
+$description = $this->room->getMeta('description');
+$pictureNumbers = $this->room->getPictureNumbers();
+
+?>
+
+<div class="centered-text">
+    <div class="padded" style="display: inline-block;">
+        <?= $this->roomPreview($this->room) ?>
+    </div>
+
+    <?php if ($pictureNumbers): ?>
+        <div>
+            <?php foreach ($pictureNumbers as $pictureNumber): ?>
+                <div class="panel" style="margin: 0px 8px 16px 8px; display: inline-block;">
+                    <a href="<?= $this->basePath($this->room->getPictureUrl($pictureNumber)) ?>" target="_blank" rel="pretty-photo[rps]" style="opacity: 1.0;">
+                        <img src="<?= $this->basePath($this->room->getThumbnailUrl($pictureNumber)) ?>" class="rounded">
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($description && ! $pictureNumbers): ?>
+        <div class="separator-small separator-line"></div>
+    <?php endif; ?>
+
+    <?php if ($description): ?>
+        <div class="padded left-text">
+            <h1><?= $this->t('Description') ?></h1>
+
+            <div class="separator-small"></div>
+
+            <?= $description ?>
+        </div>
+    <?php endif; ?>
+</div>

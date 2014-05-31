@@ -1,0 +1,32 @@
+<?php
+
+$bid = $this->bill->need('bid');
+
+if ($this->billNight) {
+    $title = 'Edit night bill';
+    $bnid = $this->billNight->need('bnid');
+} else {
+    $title = 'New night bill';
+    $bnid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bill components' => $this->url('backend/bill/edit/component', ['bid' => $bid]),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editBillNightForm, $this->url('backend/bill/edit/component/edit-night', ['bid' => $bid, 'bnid' => $bnid])) ?>
+    </div>
+</div>

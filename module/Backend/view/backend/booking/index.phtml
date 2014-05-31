@@ -1,0 +1,22 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Bookings',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Bookings') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('booking') ?>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendBookingsFormat($this->bookings) ?>
+</div>

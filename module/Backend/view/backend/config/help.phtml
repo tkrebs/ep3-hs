@@ -1,0 +1,36 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Edit help page',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Config' => $this->url('backend/config'),
+    ),
+    'links' => array(
+        'Edit info page' => $this->url('backend/config/info'),
+        'Edit booking rules' => $this->url('backend/config/rules'),
+        'Edit confirmation text' => $this->url('backend/config/confirmation'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/tinymce/tinymce.min.js'));
+$this->headScript()->appendFile($this->basePath('js/tinymce/tinymce.setup.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t('Edit help page') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <form method="post" action="<?= $this->url('backend/config/help') ?>">
+            <textarea name="ecf-help" class="wysiwyg-editor" style="width: 100%; height: 360px;"><?= $this->helpText ?></textarea>
+        </form>
+    </div>
+</div>

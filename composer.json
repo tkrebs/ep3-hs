@@ -1,0 +1,11 @@
+{
+    "name": "tkrebs/ep3-hs",
+    "description": "Online booking system for hotels",
+    "license": "MIT",
+    "homepage": "http://hs.hbsys.de/",
+
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zendframework": "2.3.*"
+    }
+}

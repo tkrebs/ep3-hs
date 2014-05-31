@@ -1,0 +1,3 @@
+Besides the usual LAMP stack (Linux, Apache 2+, MySQL 5+, PHP 5.4+), the system requires
+- the PHP intl-extension
+- the PHP Imagick-extension

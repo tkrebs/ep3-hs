@@ -1,0 +1,46 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Bill components',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bills' => $this->url('backend/bill'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Bill components') ?></h1>
+
+    <p>
+        <?php
+
+        echo sprintf($this->t('For the bill number "%s"'),
+            $this->bill->get('bnr', '-'));
+
+        if ($this->bill->get('bundle_name')) {
+            echo sprintf($this->t(' and bundle "%s"'),
+                $this->bill->get('bundle_name'));
+        }
+
+        ?>
+    </p>
+
+    <div class="separator-small"></div>
+
+    <h2><?= $this->t('Nights') ?></h2>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendBillNightsFormat($this->billNights, $this->bill) ?>
+
+    <div class="separator-small"></div>
+
+    <h2><?= $this->t('Products') ?></h2>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendBillItemsFormat($this->billItems, $this->bill) ?>
+</div>

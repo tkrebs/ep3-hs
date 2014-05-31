@@ -1,0 +1,22 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Products',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Products') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('product') ?>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendProductsFormat($this->products) ?>
+</div>

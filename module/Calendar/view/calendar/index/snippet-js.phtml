@@ -1,0 +1,59 @@
+<?php
+
+$id = sprintf('ep3-hs-calendar');
+
+$url = rtrim($this->option('service.website'), '/') . $this->url('calendar');
+
+/* Prepare capacity select */
+
+$select = sprintf('<select name="capacity" id="%s-capacity-select">', $id);
+
+for ($i = 1; $i <= $this->capacityMax; $i++) {
+    if ($i == 1) {
+        $label = $this->t('Person');
+    } else {
+        $label = $this->t('Persons');
+    }
+
+    $select .= sprintf('<option value="%s">%s %s</option>',
+        $i, $i, $label);
+}
+
+$select .= '</select>';
+
+/* Prepare dates */
+
+$dateArrival = new DateTime();
+$dateDeparture = clone $dateArrival;
+$dateDeparture->modify('+5 day');
+
+/* Prepare output */
+
+$output = '';
+
+$output .= sprintf('<form method="get" action="%s#calendar-results" id="%s-form">', $url, $id);
+$output .= sprintf('<table id="%s-table">', $id);
+
+$output .= '<tr>';
+$output .= sprintf('<td colspan="2"><div><label for="%s-capacity-select">%s</label></div><div>%s</div></td>',
+    $id, $this->t('How many persons?'), $select);
+$output .= '</tr>';
+
+$output .= '<tr>';
+$output .= sprintf('<td><div><label for="%s-date-arrival-input">%s</label></div><div><input type="text" name="date-arrival" id="%s-date-arrival-input" class="datepicker" value="%s"></div></td>',
+    $id, $this->t('Arrival date'), $id, $this->dateFormat($dateArrival, IntlDateFormatter::MEDIUM));
+$output .= sprintf('<td><div><label for="%s-date-departure-input">%s</label></div><div><input type="text" name="date-departure" id="%s-date-departure-input" class="datepicker" value="%s"></div></td>',
+    $id, $this->t('Departure date'), $id, $this->dateFormat($dateDeparture, IntlDateFormatter::MEDIUM));
+$output .= '</tr>';
+
+$output .= '<tr>';
+$output .= sprintf('<td colspan="2"><input type="hidden" name="check" value="true"><input type="submit" value="%s" id="%s-submit"></td>',
+    sprintf($this->t('Check %srooms%s'), '', ''), $id);
+$output .= '</tr>';
+
+$output .= '</table>';
+$output .= '</form>';
+
+?>
+
+document.write('<?= $output ?>');

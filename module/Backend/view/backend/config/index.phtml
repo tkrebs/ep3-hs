@@ -1,0 +1,44 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Config',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => true,
+    'links' => array(
+        'Edit info page' => $this->url('backend/config/info'),
+        'Edit help page' => $this->url('backend/config/help'),
+        'Edit booking rules' => $this->url('backend/config/rules'),
+        'Edit confirmation text' => $this->url('backend/config/confirmation'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/config/index.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t('Config') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('config') ?>
+    <?= $this->backendInfo('i18n') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?php foreach ($this->editForms as $formLabel => $editForm): ?>
+            <div class="config-form-section sandbox sandbox-list" style="padding: 16px;">
+                <a href="#<?= $editForm->getPrefix() ?>-header" class="ecf-section-header centered-text unlined" style="display: block;">
+                    <h2 id="<?= $editForm->getPrefix() ?>-header" class="gray"><?= $this->t($formLabel) ?></h2>
+                    <div class="gray small-text" style="padding-top: 2px;">(<?= $this->t('click to open') ?>)</div>
+                </a>
+
+                <div class="config-form" style="padding-top: 16px;">
+                    <?= $this->formDefault($editForm, $this->url('backend/config')) ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

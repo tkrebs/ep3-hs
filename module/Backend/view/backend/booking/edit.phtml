@@ -1,0 +1,59 @@
+<?php
+
+if ($this->booking) {
+    $title = 'Edit booking';
+    $bid = $this->booking->need('bid');
+} else {
+    $title = 'New booking';
+    $bid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bookings' => $this->url('backend/booking'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/booking/edit.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('booking') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editBookingForm, $this->url('backend/booking/edit', ['bid' => $bid])) ?>
+
+        <div id="ebf-url-provider" data-autocomplete-user-url="<?= $this->url('backend/user/interpret') ?>"></div>
+
+        <?php if ($this->booking): ?>
+            <div id="ebf-user-info" class="sandbox info-box">
+                <?= $this->userPreview($this->booking->needExtra('user')) ?>
+
+                <?= $this->backendInfoEdit('backend/user/edit', ['uid' => $this->booking->needExtra('user')->need('uid')]) ?>
+            </div>
+
+            <div id="ebf-booking-info" class="sandbox info-box">
+                <table class="compact-table">
+                    <tr>
+                        <td class="gray" style="width: 120px;"><?= $this->t('Created') ?>:</td>
+                        <td><?= $this->prettyDate(new DateTime($this->booking->need('created'))) ?></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="ebf-bill-info" class="sandbox info-box">
+                <?= $this->plugin('BillPreview')->fromBooking($this->booking, true) ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

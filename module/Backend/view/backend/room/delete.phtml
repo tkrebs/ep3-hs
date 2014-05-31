@@ -1,0 +1,31 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Delete room',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Rooms' => $this->url('backend/room'),
+    ),
+));
+
+$rid = $this->room->need('rid');
+
+?>
+
+<div>
+    <h1><?= $this->t('Delete room') ?> <b><?= $this->room->getMeta('name', $this->room->need('rnr')) ?></b></h1>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded centered-text">
+        <div><span class="symbolic symbolic-warning"><?= $this->t('Deleting this room cannot be undone. Are you sure?') ?></span></div>
+
+        <div class="separator-small"></div>
+
+        <div class="centered-text">
+            <a href="<?= $this->url('backend/room') ?>" class="default-button"><?= $this->t('No, cancel') ?></a>
+            <a href="<?= $this->url('backend/room/delete', ['rid' => $rid], ['query' => ['confirmed' => 'true']]) ?>" class="default-button"><?= $this->t('Yes, delete') ?></a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Registration',
+    'panel' => 'centered-panel large-sized',
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Registration') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <h2><?= sprintf($this->t('Welcome to %s and %s'), $this->option('subject.type'), $this->option('service.name.full')) ?></h2>
+
+    <div class="separator-small"></div>
+
+    <p>
+        <?= $this->t('We optionally offer to register yourself. This enables you to manage and cancel your bookings online, as well as speed up your next booking.') ?>
+        <br>
+        <?= $this->t('The registration itself is of course free of cost and nonbinding.') ?>
+    </p>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+
+        <?php
+
+        $form = $this->registrationForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('user/registration'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <div>
+            <table class="default-table half-table" style="float: left;">
+                <tr>
+                    <td colspan="2" class="centered-text">
+                        <div class="badge">1</div> <span class="badge-label"><?= $this->t('Login data') ?></span>
+                        <div class="separator-small"></div>
+                    </td>
+                </tr>
+
+                <?= $this->formRowDefault($form, 'rf-email1') ?>
+                <?= $this->formRowDefault($form, 'rf-email2') ?>
+                <?= $this->formRowDefault($form, 'rf-pw1') ?>
+                <?= $this->formRowDefault($form, 'rf-pw2') ?>
+            </table>
+
+            <table class="default-table half-table" style="float: right;">
+                <tr>
+                    <td colspan="2" class="centered-text">
+                        <div class="badge">2</div> <span class="badge-label"><?= $this->t('Personal data') ?></span>
+                        <div class="separator-small"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?= $this->formLabel($form->get('rf-gender')) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElement($form->get('rf-gender')) ?>
+                        <?= $this->formElementErrors($form->get('rf-gender')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?= $this->formLabel($form->get('rf-firstname')) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElement($form->get('rf-firstname')) ?>
+                        <?= $this->formElement($form->get('rf-lastname')) ?>
+                        <?= $this->formElementErrors($form->get('rf-firstname')) ?>
+                        <?= $this->formElementErrors($form->get('rf-lastname')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?= $this->formLabel($form->get('rf-street')) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElement($form->get('rf-street')) ?>
+                        <?= $this->formElement($form->get('rf-number')) ?>
+                        <?= $this->formElementErrors($form->get('rf-street')) ?>
+                        <?= $this->formElementErrors($form->get('rf-number')) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="default-form-label-row">
+                        <?= $this->formLabel($form->get('rf-zip')) ?>
+                    </td>
+                    <td>
+                        <?= $this->formElement($form->get('rf-zip')) ?>
+                        <?= $this->formElement($form->get('rf-city')) ?>
+                        <?= $this->formElementErrors($form->get('rf-zip')) ?>
+                        <?= $this->formElementErrors($form->get('rf-city')) ?>
+                    </td>
+                </tr>
+
+                <?= $this->formRowDefault($form, 'rf-country') ?>
+                <?= $this->formRowDefault($form, 'rf-phone') ?>
+            </table>
+        </div>
+
+        <br clear="all">
+
+        <div class="separator separator-line"></div>
+
+        <div class="centered-text">
+            <?= $this->formElement($form->get('rf-csrf')) ?>
+            <?= $this->formElementErrors($form->get('rf-csrf')) ?>
+
+            <?= $this->formElement($form->get('rf-submit')) ?>
+
+            <p class="gray small-text" style="margin-top: 12px;">
+                <em>
+                    <strong><?= $this->t('Data privacy') ?>:</strong>
+
+                    <?= $this->t('Your data will be handled trustfully and responsible.') ?>
+                    <?= $this->t('It will only be used and processed for the purpose of your bookings.') ?>
+                    <?= $this->t('It will neither be shared with third parties nor displayed publicly without your permission.') ?>
+                </em>
+            </p>
+        </div>
+
+        <?= $this->form()->closeTag() ?>
+
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Overview',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Overview') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <h2><?= sprintf($this->t('Overview of the next %s weeks'), $this->dateWeeks) ?></h2>
+
+    <div class="separator-small"></div>
+
+    <?php foreach ($this->dateIntervals as $i => $dateInterval): ?>
+        <?= $this->backendBookingCalendar($dateInterval['dateStart'], $dateInterval['dateEnd'], $this->rooms, $this->bookings, $i == 0) ?>
+
+        <div class="separator-small"></div>
+    <?php endforeach; ?>
+</div>

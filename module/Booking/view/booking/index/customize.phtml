@@ -1,0 +1,66 @@
+<?php
+
+$this->setup(array_merge_recursive(array(
+    'title' => 'Booking customization',
+    'panel' => 'centered-panel',
+    'messages' => array(
+        'info' => $this->bundleMessage,
+    ),
+    'back' => array(
+        'Calendar' => $this->bookingUrl('calendar', ['check' => 'true']) . '#calendar-results',
+    ),
+), $this->bookingDefaultBadges(1)));
+
+$this->headScript()->appendFile($this->basePath('js/controller/booking/customize.min.js'));
+
+?>
+
+<div>
+    <form id="bf" method="post" action="<?= $this->bookingUrl('booking/customize') ?>">
+        <div class="sandbox sandbox-list">
+            <?= $this->roomPreview($this->room) ?>
+        </div>
+
+        <div class="sandbox sandbox-list">
+            <?= $this->bookingDatePreview($this->dateArrival, $this->dateDeparture, $this->capacity) ?>
+        </div>
+
+        <div class="sandbox sandbox-list">
+            <?= $this->bookingBundlesFormat($this->bundles, $this->dateArrival, $this->dateDeparture, $this->bundleSelected) ?>
+
+            <div class="bundle">
+                <label for="bf-bundle-coupon" class="symbolic symbolic-tickets large-text" style="cursor: pointer;"><?= $this->t('Coupon') ?>?</label>
+                <input type="radio" name="bf-bundle" id="bf-bundle-coupon" class="bf-bundle" value="coupon">
+
+                <div class="bundle-customization" style="margin: 8px 0px 32px 32px;">
+                    <div class="inline-element">
+                        <label class="inline-label symbolic symbolic-tag" for="bf-coupon-code"><span style="display: none;"><?= $this->t('Coupon code') ?> &hellip;</span></label>
+                        <input type="text" name="bf-coupon-code" id="bf-coupon-code" class="inline-label-container" value="" style="padding-left: 28px; width: 256px;">
+                    </div>
+
+                    <div class="default-form-notes"><?= $this->t('Type your coupon code here, if you have one') ?></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="padded centered-text">
+            <div id="customization-submit-link" style="display: none;">
+                <a href="#" class="default-button">
+                    <span class="symbolic-arrow-right"><?= sprintf($this->t('Continue to %sregistration%s'), '<b>', '</b>') ?></span>
+                </a>
+            </div>
+
+            <div id="customization-coupon-submit-link" style="display: none;">
+                <a href="#" class="default-button">
+                    <span class="symbolic symbolic-tag"><?= sprintf($this->t('Check %scoupon code%s'), '<b>', '</b>') ?></span>
+                </a>
+            </div>
+
+            <div id="customization-submit-input">
+                <input type="submit" name="bf-submit" value="<?= sprintf($this->t('Continue to %sregistration%s'), '', '') ?>" class="default-button">
+            </div>
+
+            <div id="customization-pricing" data-url="<?= $this->bookingUrl('booking/customize/pricing') ?>"></div>
+        </div>
+    </form>
+</div>

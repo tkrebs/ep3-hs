@@ -1,0 +1,114 @@
+<?php
+
+$this->setup(array_merge_recursive(array(
+    'title' => 'Booking registration',
+    'panel' => 'centered-panel',
+    'messages' => array(
+        'info' => $this->registrationMessage,
+    ),
+    'back' => array(
+        'Customization' => $this->bookingUrl('booking/customize'),
+    ),
+), $this->bookingDefaultBadges(2)));
+
+$this->headScript()->appendFile($this->basePath('js/controller/booking/register.min.js'));
+
+?>
+
+<div>
+    <div class="padded">
+
+        <?php
+
+        $form = $this->registrationForm;
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->bookingUrl('booking/register'));
+        $form->prepare();
+
+        ?>
+
+        <?= $this->form()->openTag($form) ?>
+
+        <table class="default-table">
+            <tr>
+                <td class="default-form-label-row">
+                    <?= $this->formLabel($form->get('rf-gender')) ?>
+                </td>
+                <td>
+                    <?= $this->formElement($form->get('rf-gender')) ?>
+                    <?= $this->formElementErrors($form->get('rf-gender')) ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="default-form-label-row">
+                    <?= $this->formLabel($form->get('rf-firstname')) ?>
+                </td>
+                <td>
+                    <?= $this->formElement($form->get('rf-firstname')) ?>
+                    <?= $this->formElement($form->get('rf-lastname')) ?>
+                    <?= $this->formElementErrors($form->get('rf-firstname')) ?>
+                    <?= $this->formElementErrors($form->get('rf-lastname')) ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="default-form-label-row">
+                    <?= $this->formLabel($form->get('rf-street')) ?>
+                </td>
+                <td>
+                    <?= $this->formElement($form->get('rf-street')) ?>
+                    <?= $this->formElementErrors($form->get('rf-street')) ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="default-form-label-row">
+                    <?= $this->formLabel($form->get('rf-zip')) ?>
+                </td>
+                <td>
+                    <?= $this->formElement($form->get('rf-zip')) ?>
+                    <?= $this->formElement($form->get('rf-city')) ?>
+                    <?= $this->formElementErrors($form->get('rf-zip')) ?>
+                    <?= $this->formElementErrors($form->get('rf-city')) ?>
+                </td>
+            </tr>
+
+            <?= $this->formRowDefault($form, 'rf-country') ?>
+            <?= $this->formRowDefault($form, 'rf-email') ?>
+            <?= $this->formRowDefault($form, 'rf-phone') ?>
+            <?= $this->formRowDefault($form, 'rf-notes') ?>
+
+            <tr>
+                <td colspan="2">
+                    <div class="separator-small separator-line"></div>
+                </td>
+            </tr>
+
+            <?= $this->formRowRadio($form, 'rf-payment') ?>
+        </table>
+
+        <div class="separator"></div>
+
+        <div class="centered-text">
+            <?= $this->formElement($form->get('rf-csrf')) ?>
+            <?= $this->formElementErrors($form->get('rf-csrf')) ?>
+
+            <div id="registration-submit-link" style="display: none;">
+                <a href="#" class="default-button">
+                    <span class="symbolic-arrow-right"><?= sprintf($this->t('Continue to %sconfirmation%s'), '<b>', '</b>') ?></span>
+                </a>
+            </div>
+
+            <div id="registration-submit-link-paypal" style="display: none;">
+                <a href="#" class="default-button">
+                    <span class="symbolic-arrow-right"><?= sprintf($this->t('Continue to %sPayPal%s'), '<b>', '</b>') ?></span>
+                </a>
+            </div>
+
+            <div id="registration-submit-input">
+                <?= $this->formElement($form->get('rf-submit')) ?>
+            </div>
+        </div>
+
+        <?= $this->form()->closeTag() ?>
+
+    </div>
+</div>

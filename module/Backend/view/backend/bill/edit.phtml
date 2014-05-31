@@ -1,0 +1,86 @@
+<?php
+
+if ($this->bill) {
+    $title = 'Edit bill';
+    $bid = $this->bill->need('bid');
+} else {
+    $title = 'New bill';
+    $bid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bills' => $this->url('backend/bill'),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/bill/edit.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editBillForm, $this->url('backend/bill/edit', ['bid' => $bid])) ?>
+
+        <div id="ebf-url-provider" data-autocomplete-user-url="<?= $this->url('backend/user/interpret') ?>"></div>
+
+        <?php if ($this->bill): ?>
+            <?php if ($this->bill->getExtra('booking')): ?>
+                <div id="ebf-booking-info" class="sandbox info-box">
+                    <?= $this->bookingPreview($this->bill->needExtra('booking')) ?>
+
+                    <?= $this->backendInfoEdit('backend/booking/edit', ['bid' => $this->bill->needExtra('booking')->need('bid')]) ?>
+                </div>
+            <?php endif; ?>
+
+            <div id="ebf-user-info" class="sandbox info-box">
+                <?= $this->userPreview($this->bill->needExtra('user')) ?>
+
+                <?= $this->backendInfoEdit('backend/user/edit', ['uid' => $this->bill->needExtra('user')->need('uid')]) ?>
+            </div>
+
+            <div id="ebf-bill-info" class="sandbox info-box">
+                <table class="compact-table">
+                    <tr>
+                        <td class="gray" style="width: 120px;"><?= $this->t('Payment method') ?>:</td>
+                        <td>
+                            <?php
+                                switch ($this->bill->getMeta('payment.method')) {
+                                    case 'paypal':
+                                        $paymentMethod = 'PayPal';
+                                        break;
+                                    case 'invoice':
+                                        $paymentMethod = 'Invoice';
+                                        break;
+                                    default:
+                                        $paymentMethod = 'Unknown';
+                                }
+
+                                echo $this->t($paymentMethod);
+                            ?>
+                        </td>
+                    </tr>
+
+                    <?php if ($this->bill->get('bundle_name')): ?>
+                        <tr>
+                            <td class="gray" style="width: 120px;"><?= $this->t('Bundle') ?>:</td>
+                            <td><?= $this->bill->get('bundle_name') ?></td>
+                        </tr>
+                    <?php endif; ?>
+
+                    <tr>
+                        <td class="gray" style="width: 120px;"><?= $this->t('Created') ?>:</td>
+                        <td><?= $this->prettyDate(new DateTime($this->bill->need('created'))) ?></td>
+                    </tr>
+                </table>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

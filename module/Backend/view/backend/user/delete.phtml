@@ -1,0 +1,35 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Delete user',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Users' => $this->url('backend/user'),
+    ),
+));
+
+$uid = $this->user->need('uid');
+
+?>
+
+<div>
+    <h1><?= $this->t('Delete user') ?> <b><?= $this->user->need('alias') ?></b></h1>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded centered-text">
+        <div><span class="symbolic symbolic-warning"><?= $this->t('Deleting this user cannot be undone. Are you sure?') ?></span></div>
+
+        <div class="separator-small"></div>
+
+        <div class="centered-text">
+            <a href="<?= $this->url('backend/user') ?>" class="default-button"><?= $this->t('No, cancel') ?></a>
+            <a href="<?= $this->url('backend/user/delete', ['uid' => $uid], ['query' => ['confirmed' => 'true']]) ?>" class="default-button"><?= $this->t('Yes, delete') ?></a>
+        </div>
+
+        <div class="separator-small"></div>
+
+        <div class="small-text gray"><?= $this->t('Remember that you can also set the user status to deleted<br>without really deleting them. This can be undone.') ?></div>
+    </div>
+</div>

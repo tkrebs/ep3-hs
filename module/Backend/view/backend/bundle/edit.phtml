@@ -1,0 +1,34 @@
+<?php
+
+if ($this->bundle) {
+    $title = 'Edit bundle';
+    $bid = $this->bundle->need('bid');
+} else {
+    $title = 'New bundle';
+    $bid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bundles' => $this->url('backend/bundle'),
+    ),
+));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('bundle') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editBundleForm, $this->url('backend/bundle/edit', ['bid' => $bid])) ?>
+    </div>
+</div>

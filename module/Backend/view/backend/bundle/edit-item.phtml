@@ -1,0 +1,38 @@
+<?php
+
+$bid = $this->bundle->need('bid');
+
+if ($this->bundleItem) {
+    $title = 'Edit bundle product rule';
+    $biid = $this->bundleItem->need('biid');
+} else {
+    $title = 'New bundle product rule';
+    $biid = null;
+}
+
+$this->setup(array(
+    'title' => $title,
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => array(
+        'Bundle components' => $this->url('backend/bundle/edit/component', ['bid' => $bid]),
+    ),
+));
+
+$this->headScript()->appendFile($this->basePath('js/controller/backend/bundle/edit-item.min.js'));
+
+?>
+
+<div>
+    <h1><?= $this->t($title) ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('bundle-item') ?>
+
+    <div class="separator separator-line"></div>
+
+    <div class="padded">
+        <?= $this->formDefault($this->editBundleItemForm, $this->url('backend/bundle/edit/component/edit-item', ['bid' => $bid, 'biid' => $biid])) ?>
+    </div>
+</div>

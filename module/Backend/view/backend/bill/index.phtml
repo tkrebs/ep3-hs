@@ -1,0 +1,22 @@
+<?php
+
+$this->setup(array(
+    'title' => 'Bills',
+    'panel' => 'centered-panel large-sized',
+    'tabs' => $this->backendDefaultTabs(),
+    'back' => true,
+));
+
+?>
+
+<div>
+    <h1><?= $this->t('Bills') ?></h1>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendInfo('bill') ?>
+
+    <div class="separator-small"></div>
+
+    <?= $this->backendBillsFormat($this->bills) ?>
+</div>
