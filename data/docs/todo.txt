@@ -1,14 +1,15 @@
 Short Term:
 
-- PayPal module
-
 - Backend is partially unlocalized
 - Backend localized storage for rooms
 
-Long Term:
-
-- Introduce unit tests
-
 - Social media integration
 
-- Maintenance cronjob
+Long Term:
+
+- Introduce testing via PHPUnit/Selenium
+- Introduce maintenance cronjob
+
+- Occasionally clean session directory
+
+- PayPal module
