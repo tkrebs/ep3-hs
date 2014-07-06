@@ -11,7 +11,9 @@
  *
  * If true, certain caches will be enabled.
  */
-define('EP3_HS_DEV', true);
+if (! defined('EP3_HS_DEV')) {
+    define('EP3_HS_DEV', true);
+}
 
 /**
  * Application configuration array
