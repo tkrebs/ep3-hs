@@ -177,6 +177,23 @@ class EditBundleItemForm extends Form
         $factory = new Factory();
 
         $this->setInputFilter($factory->createInputFilter(array(
+            'ebif-pid' => array(
+                'validators' => array(
+                    array(
+                        'name' => 'Callback',
+                        'options' => array(
+                            'callback' => function($value) {
+                                if ($value == '0') {
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+                            },
+                            'message' => 'Please choose a product',
+                        ),
+                    ),
+                ),
+            ),
             'ebif-amount-min' => array(
                 'filters' => array(
                     array('name' => 'StringTrim'),

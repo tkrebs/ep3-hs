@@ -169,7 +169,10 @@ class AccountController extends AbstractActionController
                 $userManager->create($alias, 'enabled', $email, $pw, $meta);
                 $userSessionManager->login($email, $pw);
 
-                return $this->redirectBack()->toOrigin();
+                $this->flashMessenger()->addSuccessMessage(
+                    $this->t('Your registration has been completed. Welcome and thank you very much for your trust in our service!'));
+
+                return $this->redirect()->toRoute('user/dashboard');
             }
         }
 

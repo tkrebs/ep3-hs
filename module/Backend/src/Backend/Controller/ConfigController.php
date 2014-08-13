@@ -205,7 +205,7 @@ class ConfigController extends AbstractActionController
 
                 $optionManager->set('subject.rules.text', $editRulesData['erf-text'], $locale);
 
-                $this->flashMessenger()->addSuccessMessage('Rules has been updated');
+                $this->flashMessenger()->addSuccessMessage('Rules have been updated');
 
                 return $this->redirect()->toRoute('backend/config/rules');
             }
@@ -222,7 +222,7 @@ class ConfigController extends AbstractActionController
 
         $documentFileElement->setOptions(array_merge($documentFileElement->getOptions(), array(
             'notes' => sprintf('%s<br>(<a href="%s" target="_blank">%s</a> %s)',
-                $documentFileElementNotes,
+                $this->t($documentFileElementNotes),
                 $optionManager->get('subject.rules.document.file'),
                 $this->t('current document'),
                 $this->t('will be replaced')),

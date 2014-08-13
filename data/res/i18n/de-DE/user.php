@@ -9,6 +9,7 @@ return array(
     'Forgot your password?' => 'Passwort vergessen?',
 
     'We have just received your request to reset your password.' => 'Sie haben kürzlich darum gebeten, Ihr Passwort bei uns neu eingeben zu dürfen.',
+    'Unfortunately, your account is considered a guest account and thus cannot login.' => 'Leider wurde Ihr Benutzerkonto nur als einmaliger Gastzugang definiert.',
     'Unfortunately, your account is considered a placeholder and thus cannot login.' => 'Leider wurde Ihr Benutzerkonto als Platzhalter definiert.',
     'Unfortunately, your account is currently blocked. Please contact us for support.' => 'Leider wurde Ihr Benutzerkonto gesperrt. Bitte kontaktieren Sie uns.',
     'Unfortunately, your account is currently disabled. Please contact us for support.' => 'Leider wurde Ihr Benutzerkonto deaktiviert. Bitte kontaktieren Sie uns.',
@@ -86,6 +87,7 @@ return array(
     'Update phone number' => 'Telefonnummer ändern',
 
     'Change password' => 'Passwort ändern',
+    'New password' => 'Neues Passwort',
 
     'Please type your phone number here' => 'Bitte geben Sie Ihre Telefonnummer ein',
     'This phone number is somewhat short ...' => 'Diese Telefonnummer ist etwas kurz',
@@ -104,6 +106,7 @@ return array(
     'Country' => 'Land',
     'Address' => 'Adresse',
     'Email address' => 'E-Mail Adresse',
+    'Password' => 'Passwort',
     'Phone number' => 'Telefonnummer',
     'Birthday' => 'Geburtstag',
     'Notes' => 'Anmerkungen',
@@ -141,16 +144,31 @@ return array(
         => 'Kein Grund traurig zu sein. Geben Sie hier einfach Ihre E-Mail Adresse ein und wir senden Ihnen eine E-Mail zum Zurücksetzen Ihres Passwortes zu.',
 
     'Register now' => 'Jetzt registrieren',
-    'Welcome to our %s' => 'Willkommen zu unserem %s',
+    'Welcome to %s and %s' => 'Willkommen zu %s und %s',
+
+    'Your registration has been completed. Welcome and thank you very much for your trust in our service!'
+        => 'Ihre Registrierung ist abgeschlossen. Herzlich willkommen und vielen Dank für Ihr Vertrauen in unser Angebot!',
+
+    'We optionally offer to register yourself. This enables you to manage and cancel your bookings online, as well as speed up your next booking.'
+        => 'Wenn Sie möchten, können Sie sich bei uns registrieren. Dies erlaubt Ihnen, Ihre Buchungen online zu prüfen, bei Bedarf zu stornieren und Ihre neuen Buchungen zu beschleunigen.',
+    'The registration itself is of course free of cost and nonbinding.' => 'Die Registrierung selbst ist natürlich kostenlos und unverbindlich.',
 
     'Login' => 'Anmelden',
     'Logout' => 'Abmelden',
     'Login data' => 'Zugangsdaten',
     'Personal data' => 'Persönliche Angaben',
 
+    'My bookings' => 'Meine Buchungen',
+    'My account' => 'Meine Daten',
+    'My profile' => 'Mein Konto',
+    'Administration' => 'Verwaltung',
+
+    'If you have already registered, you can login here with your email address.'
+        => 'Wenn Sie sich bereits bei uns registriert haben, können Sie sich hier mit Ihrer E-Mail Adresse anmelden.',
+
     'Data privacy' => 'Datenschutz',
     'Your data will be handled trustfully and responsible.' => 'Ihre Daten werden vertrauensvoll und verantwortungsbewusst behandelt.',
-    'It will only be used and processed for the purpose of our service.' => 'Sie werden ausschließlich für den Betrieb unseres Angebotes verwendet.',
+    'It will only be used and processed for the purpose of your bookings.' => 'Sie werden ausschließlich für die Buchungsabwicklung verwendet.',
     'It will neither be shared with third parties nor displayed publicly without your permission.'
         => 'Sie werden ohne Ihre Zustimmung nicht an Dritte weitergegeben oder öffentlich angezeigt.',
 
@@ -159,6 +177,8 @@ return array(
     'Delete this account' => 'Benutzerkonto löschen',
 
     'Good Bye, %s' => 'Auf Wiedersehen, %s',
+
+    /* Email */
 
     'Dear' => 'Sehr geehrte/r Herr/Frau',
     'Sincerely' => 'Mit freundlichen Grüßen',

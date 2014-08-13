@@ -73,4 +73,6 @@ return array(
     'Yes' => 'Ja',
     'No' => 'Nein',
 
+    'We are still working on this function.' => 'An dieser Funktion arbeiten wir noch.',
+
 );

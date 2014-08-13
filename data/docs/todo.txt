@@ -1,7 +1,8 @@
 Short Term:
 
-- Backend is partially unlocalized
 - Backend localized storage for rooms
+
+- Dashboard, bookings and booking login for registered users
 
 - Social media integration
 

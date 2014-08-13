@@ -56,7 +56,7 @@ class RegistrationForm extends Form
                 'style' => 'width: 250px;',
             ),
             'options' => array(
-                'label' => '&nbsp;',
+                'label' => ' ',
                 'notes' => 'Please type your email address again<br>to prevent typing errors',
             ),
         ));
@@ -85,7 +85,7 @@ class RegistrationForm extends Form
                 'style' => 'width: 250px;',
             ),
             'options' => array(
-                'label' => '&nbsp;',
+                'label' => ' ',
                 'notes' => 'Please type your password again<br>to prevent typing errors',
             ),
         ));

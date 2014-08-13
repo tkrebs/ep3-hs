@@ -41,8 +41,8 @@ where you can find stable and (latest) development releases.
 
 ## Version
 
-The current version (May, 2014) is 0.8, as the software is not yet fully complete and might rather be considered as in
-alpha status.
+The current version (August, 2014) is 0.81, as the software is not yet fully complete and might rather be considered as
+in beta status. It is usable for production though.
 
 ## Bug reports, feature requests, ideas ...
 
