@@ -122,7 +122,7 @@ class BookingService extends AbstractService
                 $bundleItemAmount = $bundleItem->needExtra('amount');
 
                 if ($bundleItemAmount > 0) {
-                    if ($bundleItem->need('due')) {
+                    if ($bundleItem->need('due') == 'per_night') {
                         if ($bundleItemAmount == 1) {
                             $bundleItemAmount = $bundle->needExtra('nights');
                         }
