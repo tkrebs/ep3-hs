@@ -1,21 +1,49 @@
 <IfModule mod_rewrite.c>
 
     RewriteEngine On
-    RewriteBase /
 
-    #RewriteCond %{ENV:REDIRECT_STATUS} ^$
-    #RewriteRule ^index\.php$ http://bookings.example.com/ [R=301,L]
+    # Browser icon specific file rewrites
+    RewriteRule ^(favicon\.ico)$ imgs-client/icons/fav.ico [L]
 
-    #RewriteCond %{ENV:REDIRECT_STATUS} ^$
-    #RewriteRule ^index\.php/(.*)$ http://bookings.example.com/$1 [R=301,L]
+    # Miscellaneous specific file rewrites
+    RewriteRule ^(robots\.txt)$ misc/$1 [L]
 
-    RewriteRule ^robots\.txt$ misc/robots.txt
-    RewriteRule ^favicon\.ico$ imgs-client/icons/fav.ico
-
+    # The following rule tells Apache that if the requested filename
+    # exists, simply serve it.
     RewriteCond %{REQUEST_FILENAME} -s [OR]
     RewriteCond %{REQUEST_FILENAME} -l [OR]
     RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^.*$ - [L]
-    RewriteRule ^.*$ index.php [L]
+    RewriteRule ^.*$ - [NC,L]
+
+    # The following rewrites all other queries to index.php. The
+    # condition ensures that if you are using Apache aliases to do
+    # mass virtual hosting, the base path will be prepended to
+    # allow proper resolution of the index.php file; it will work
+    # in non-aliased environments as well, providing a safe, one-size
+    # fits all solution.
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+    RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
 
 </IfModule>
+
+# Explain mod_rewrite problem
+ErrorDocument 404 "<p>The Apache HTTP Server module <b>mod_rewrite</b> must be installed and enabled to be used in <b>.htaccess</b> files - but seems not to.</p><p>Please ask your server's administrator to enable it.</p>"
+
+# Configure output compression
+<IfModule mod_filter.c>
+<IfModule mod_deflate.c>
+
+    AddType application/font-woff woff
+    AddType application/font-woff2 woff2
+
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css text/javascript application/javascript application/json image/svg+xml image/x-icon application/font-woff application/font-woff2 application/vnd.ms-fontobject
+
+</IfModule>
+</IfModule>
+
+# Set default charset for text and html files
+AddDefaultCharset UTF-8
+
+# Disable directory listings and MultiViews negotiation
+Options -Indexes -MultiViews
