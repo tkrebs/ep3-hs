@@ -6,6 +6,7 @@ use Bundle\Entity\Bundle;
 use Bundle\Entity\BundleItem;
 use Bundle\Entity\BundleNight;
 use DateTime;
+use Zend\I18n\Filter\NumberFormat;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class BundleController extends AbstractActionController
@@ -232,7 +233,7 @@ class BundleController extends AbstractActionController
                     'ebif-amount-required' => $amountMin == 1 && $amountMax == 1 ? true : false,
                     'ebif-amount-min' => $amountMin,
                     'ebif-amount-max' => $amountMax,
-                    'ebif-price' => $bundleItem->need('price') / 100,
+                    'ebif-price' => (New NumberFormat())->filter($bundleItem->need('price') / 100),
                     'ebif-rate' => $bundleItem->need('rate'),
                     'ebif-gross' => $bundleItem->need('gross'),
                 ));
@@ -315,7 +316,7 @@ class BundleController extends AbstractActionController
                 $editBundleNightForm->setData(array(
                     'ebnf-nights-min' => $bundleNight->need('nights_min'),
                     'ebnf-nights-max' => $bundleNight->need('nights_max'),
-                    'ebnf-price' => $bundleNight->need('price') / 100,
+                    'ebnf-price' => (New NumberFormat())->filter($bundleNight->need('price') / 100),
                     'ebnf-rate' => $bundleNight->need('rate'),
                     'ebnf-gross' => $bundleNight->need('gross'),
                 ));

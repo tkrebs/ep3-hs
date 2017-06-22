@@ -136,10 +136,11 @@ class EditBundleNightForm extends Form
             'ebnf-price' => array(
                 'filters' => array(
                     array('name' => 'StringTrim'),
+                    array('name' => 'NumberParse'),
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'Digits',
+                        'name' => 'IsFloat',
                         'options' => array(
                             'message' => 'Please type a number here',
                         ),

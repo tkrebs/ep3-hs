@@ -7,6 +7,7 @@ use Bill\Entity\BillItem;
 use Bill\Entity\BillNight;
 use DateTime;
 use RuntimeException;
+use Zend\I18n\Filter\NumberFormat;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class BillController extends AbstractActionController
@@ -234,7 +235,7 @@ class BillController extends AbstractActionController
                 $editBillItemForm->setData(array(
                     'ebif-pid-name' => $billItem->need('pid_name'),
                     'ebif-amount' => $billItem->need('amount'),
-                    'ebif-price' => $billItem->need('price') / 100,
+                    'ebif-price' => (New NumberFormat())->filter($billItem->need('price') / 100),
                     'ebif-rate' => $billItem->need('rate'),
                     'ebif-gross' => $billItem->need('gross'),
                 ));
@@ -318,7 +319,7 @@ class BillController extends AbstractActionController
                     'ebnf-date-arrival' => $this->dateFormat($billNight->need('date_arrival')),
                     'ebnf-date-departure' => $this->dateFormat($billNight->need('date_departure')),
                     'ebnf-quantity' => $billNight->need('quantity'),
-                    'ebnf-price' => $billNight->need('price') / 100,
+                    'ebnf-price' => (New NumberFormat())->filter($billNight->need('price') / 100),
                     'ebnf-rate' => $billNight->need('rate'),
                     'ebnf-gross' => $billNight->need('gross'),
                 ));
