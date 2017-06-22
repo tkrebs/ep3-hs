@@ -119,7 +119,7 @@ class EditBundleNightForm extends Form
                     ),
                 ),
             ),
-            'ebnf-nights-min' => array(
+            'ebnf-nights-max' => array(
                 'filters' => array(
                     array('name' => 'StringTrim'),
                 ),
