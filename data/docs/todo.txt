@@ -1,16 +1,14 @@
 Short Term:
 
 - Backend localized storage for rooms
-
 - Dashboard, bookings and booking login for registered users
-
 - Social media integration
+
+
 
 Long Term:
 
-- Introduce testing via PHPUnit/Selenium
 - Introduce maintenance cronjob
-
+- Introduce testing via PHPUnit/Selenium
 - Occasionally clean session directory
-
 - PayPal module

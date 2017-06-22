@@ -4,7 +4,7 @@
  *
  * ep-3 Hotelsystem
  *
- * (c) 2014 Tobias Krebs
+ * (c) 2017 Tobias Krebs
  *
  * Website: http://hs.hbsys.de/
  * License: MIT
