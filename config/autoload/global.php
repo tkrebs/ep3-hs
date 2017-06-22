@@ -6,7 +6,7 @@
  * need to worry about its contents.
  */
 
-ini_set('error_reporting', E_ALL | E_STRICT);
+ini_set('error_reporting', (E_ALL | E_STRICT) ^ E_DEPRECATED);
 ini_set('error_log', getcwd() . '/data/log/errors.txt');
 ini_set('default_charset', 'UTF-8');
 
