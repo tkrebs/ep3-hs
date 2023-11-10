@@ -1,3 +1,6 @@
+> [!WARNING]
+> **This project has been discontinued**!
+
 # ep-3 Hotelsystem
 
 The ep-3 Hotelsystem is an open source (MIT licensed) web application for hotels and similar facilities,
